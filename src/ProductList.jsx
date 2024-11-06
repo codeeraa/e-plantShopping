@@ -212,6 +212,45 @@ function ProductList() {
             ]
         }
     ];
+    const dispatch = useDispatch();
+    const [addedToCart, setAddedToCart] = useState({});
+
+        const handleAddToCart = (plant) => {
+        dispatch(addItem(plant));
+        setAddedToCart((prevState) => ({
+            ...prevState,
+            [plant.name]: true,
+        }));
+    };
+
+    return (
+        <div className="product-grid">
+            {plantsArray.map((category, index) => (
+                <div key={index}>
+                    <h1>{category.category}</h1>
+                    <div className="product-list">
+                        {category.plants.map((plant, plantIndex) => (
+                            <div className="product-card" key={plantIndex}>
+                                <img className="product-image" src={plant.image} alt={plant.name} />
+                                <div className="product-title">{plant.name}</div>
+                                <p className="product-description">{plant.description}</p>
+                                <p className="product-cost">{plant.cost}</p>
+                                <button
+                                    className="product-button"
+                                    onClick={() => handleAddToCart(plant)}
+                                    disabled={addedToCart[plant.name]} // disable jika sudah di cart
+                                >
+                                    {addedToCart[plant.name] ? "Added to Cart" : "Add to Cart"}
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
+
    const styleObj={
     backgroundColor: '#4CAF50',
     color: '#fff!important',
