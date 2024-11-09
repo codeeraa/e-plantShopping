@@ -111,6 +111,13 @@ body {
     background-color: #c0392b;
 }
 
+/* Styles for when the item is added to the cart */
+.product-button.added {
+    background-color: grey; /* Grey background when product is added */
+    color: white; /* White text when added */
+    border: 1px solid grey;
+}
+
 /* Pseudo-elements - Sale badge */
 .product-card::before {
     content: "SALE";
